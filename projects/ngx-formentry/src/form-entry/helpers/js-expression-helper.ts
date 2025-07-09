@@ -1,4 +1,12 @@
 import * as _ from 'lodash';
+import dayjs from 'dayjs';
+
+type AgeUnit = 'days' | 'weeks' | 'months';
+
+interface AgeTarget {
+  value: number;
+  unit: AgeUnit;
+}
 export class JsExpressionHelper {
   calcBMI(height, weight) {
     let r;
@@ -241,6 +249,14 @@ export class JsExpressionHelper {
     }
   }
 
+  calcAgeByDuration(ageValue: number, ageUnit: AgeUnit[]): boolean {
+ 
+    const patientDateOfBirth = dayjs(ageValue);
+    const currentDateTime = dayjs();
+ 
+    return currentDateTime.diff(patientDateOfBirth,ageUnit);
+  }
+
   get helperFunctions() {
     const helper = this;
     return {
@@ -251,7 +267,8 @@ export class JsExpressionHelper {
       calcHeightForAgeZscore: helper.calcHeightForAgeZscore,
       isEmpty: helper.isEmpty,
       arrayContains: helper.arrayContains,
-      extractRepeatingGroupValues: helper.extractRepeatingGroupValues
+      extractRepeatingGroupValues: helper.extractRepeatingGroupValues,
+      calcAgeByDuration: helper.calcAgeByDuration
     };
   }
 }
