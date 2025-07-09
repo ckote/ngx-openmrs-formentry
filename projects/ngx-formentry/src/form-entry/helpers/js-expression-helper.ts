@@ -249,7 +249,7 @@ export class JsExpressionHelper {
     }
   }
 
-  calcAgeByDuration(ageValue: number, ageUnit: AgeUnit[]): boolean {
+  calcAgeByDuration(ageValue: number, ageUnit: AgeUnit[]): string {
  
     const patientDateOfBirth = dayjs(ageValue);
     const currentDateTime = dayjs();
